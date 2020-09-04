@@ -1,0 +1,45 @@
+.head {
+    background-color: rgb(88, 88, 88);
+    color: white;
+    margin-left: -1.5rem;
+    margin-right: -1.5rem;
+    padding: 1rem 2rem;
+}
+
+.field {
+    label {
+        color: rgb(252, 255, 50);
+    }
+}
+
+.logo {
+    width: 3rem;
+}
+
+h1 {
+    font-weight: bold;
+}
+
+.user-auth {
+    display: inline;
+    margin-left: auto;
+    align-self: center;
+
+    a, span {
+        display: inline-block;
+    }
+
+    span.btn {
+        color: rgb(2, 255, 2);
+        cursor: default!important;
+    }
+}
+
+.btn-account {
+    background-color: white;
+    color: black;
+}
+
+img {
+    max-width: 100%;
+}

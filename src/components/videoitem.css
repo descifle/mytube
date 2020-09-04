@@ -2,6 +2,7 @@
     display: flex !important;
     align-items: center;
     cursor: pointer;
+    border-bottom: 1px solid rgba(34,36,38,.15);
 }
 
 .video-item.item img {

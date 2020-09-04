@@ -1,0 +1,7 @@
+.invalid-form:focus {
+    color: #6e707e;
+    background-color: #fff;
+    border-color: #bac8f3;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(223, 78, 78, 0.25)!important;
+}

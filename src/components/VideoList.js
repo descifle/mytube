@@ -1,14 +1,16 @@
 import React from 'react';
+import './videolist.scss';
 import VideoItem  from './/VideoItem';
 
-const VideoList = ({ videos, onVideoSelect }) => {
+const VideoList = ({ videos, onVideoSelect, status }) => {
 
     const renderedList = videos.map((video) => {
-        return <VideoItem key={video.id.videoId} onVideoSelect={onVideoSelect} video={video} />
+        return <VideoItem status={status} key={video.id.videoId} onVideoSelect={onVideoSelect} video={video} />
     })
 
     return (
-        <div className="ui relaxed divided list">
+        <div className={status}>
+            {status ? <h2 className="w-100">Your Saved Videos</h2> : false}
             {renderedList}
         </div>
     )

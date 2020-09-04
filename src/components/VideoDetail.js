@@ -1,6 +1,7 @@
 import React from 'react';
+import './videodetail.css';
 
-const VideoDetail = ({ video}) => {
+const VideoDetail = ({video, saveVideo}) => {
 
     if(!video) {
         return <div>Loading...</div>
@@ -9,13 +10,13 @@ const VideoDetail = ({ video}) => {
     const videoSrc = `https://www.youtube.com/embed/${video.id.videoId}`
 
     return (
-        <div>
-            <div className="ui embed">
-            <iframe title="Video Player" src={videoSrc}/>
+        <div className="card">
+            <div className="embed-responsive embed-responsive-16by9">
+                <iframe title="embed-responsive-item" src={videoSrc}/>
             </div>
-            <div className="ui segment">
-                <h4>{video.snippet.title}</h4>
-                <p>{video.snippet.description}</p>
+            <div className="card-body">
+                <h4 className="card-title">{video.snippet.title}</h4>
+                <p className="text-muted">{video.snippet.description} <button className="btn btn-success" onClick={() => {saveVideo(video)}}>Save Video</button></p>
             </div>
         </div>
     )

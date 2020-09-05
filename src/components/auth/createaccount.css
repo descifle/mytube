@@ -5,3 +5,9 @@
     outline: 0;
     box-shadow: 0 0 0 0.2rem rgba(223, 78, 78, 0.25)!important;
 }
+
+.bg-login-image_create {
+    background: url(../../assets/backdrop.jpg);
+    background-position: center;
+    background-size: cover;
+}

@@ -16,7 +16,8 @@ const VideoDetail = ({video, saveVideo}) => {
             </div>
             <div className="card-body">
                 <h4 className="card-title">{video.snippet.title}</h4>
-                <p className="text-muted">{video.snippet.description} <button className="btn btn-success" onClick={() => {saveVideo(video)}}>Save Video</button></p>
+                <p className="text-muted">{video.snippet.description}</p>
+                <button className="btn btn-save float-right" onClick={() => {saveVideo(video)}}>Save Video</button>
             </div>
         </div>
     )

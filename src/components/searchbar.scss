@@ -12,6 +12,10 @@
     }
 }
 
+.modal {
+    color: black;
+}
+
 .logo {
     width: 3rem;
 }
@@ -24,15 +28,37 @@ h1 {
     display: inline;
     margin-left: auto;
     align-self: center;
+    text-align: center;
 
-    a, span {
+    .btn-account {
         display: inline-block;
+        margin: auto;
+
+        &:hover, &:active {
+            background-color: rgb(121, 121, 121);
+            color: white;
+        }
     }
 
-    span.btn {
-        color: rgb(2, 255, 2);
-        cursor: default!important;
+    .btn-light {
+        margin-left: 0;
+        margin-top: .5rem;
     }
+
+    // span.btn-light {
+    //     display: inline-block;
+
+    //     &:hover {
+    //         border: 1px solid white;
+    //         color: inherit;
+    //         background-color: rgb(121, 121, 121);
+    //         color: white;
+
+    //         a {
+    //             color: white;
+    //         }
+    //     }
+    // }
 }
 
 .btn-account {
@@ -42,4 +68,13 @@ h1 {
 
 img {
     max-width: 100%;
+}
+
+@media(min-width: 40rem) {
+    .user-auth {
+        .btn-light {
+            margin-left: .4rem;
+            margin-top: 0;
+        }
+    }
 }

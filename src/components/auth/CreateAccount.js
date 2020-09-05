@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import './createaccount.css';
 import '../sb.css';
+import '../../assets/backdrop.jpg';
 
 class CreateAccount extends Component {
   state = {
@@ -23,6 +24,8 @@ class CreateAccount extends Component {
       axios.post('http://localhost:5000/users/add', user)
       .then((res) => {console.log(res.data)})
       .catch((err) => {console.log(err.response)})
+
+      window.location = '/login'
     }
 
     handleChange = (event) => {
@@ -63,7 +66,7 @@ class CreateAccount extends Component {
               <div className="card o-hidden border-0 shadow-lg my-5">
                 <div className="card-body p-0">
                   <div className="row">
-                    <div className="col-lg-6 d-none d-lg-block bg-login-image"></div>
+                    <div className="col-lg-6 d-none d-lg-block bg-login-image_create"></div>
                     <div className="col-lg-6">
                       <div className="p-5">
                         <div className="text-center">
@@ -96,19 +99,10 @@ class CreateAccount extends Component {
                             required
                             />
                           </div>
-                          <div className="form-group">
-                            <div className="custom-control custom-checkbox small">
-                              <input 
-                              type="checkbox" 
-                              className="custom-control-input" 
-                              id="customCheck"
-                              />
-                              <label className="custom-control-label">Remember Me</label>
-                            </div>
-                          </div>
                           <button disabled={!this.validateForm()} className="btn btn-primary btn-user btn-block">
-                            Login
+                            Create Account
                           </button>
+                          <Link to="/" className="btn btn-block">Continue without logging in</Link>
                           <hr/>
                         </form>
                         <hr/>

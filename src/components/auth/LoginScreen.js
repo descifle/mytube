@@ -107,19 +107,10 @@ class LoginScreen extends Component {
                             required
                             />
                           </div>
-                          <div className="form-group">
-                            <div className="custom-control custom-checkbox small">
-                              <input 
-                              type="checkbox" 
-                              className="custom-control-input" 
-                              id="customCheck"
-                              />
-                              <label className="custom-control-label">Remember Me</label>
-                            </div>
-                          </div>
                           <button disabled={!this.validateForm()} className="btn btn-primary btn-user btn-block">
                             Login
                           </button>
+                          <Link to="/" className="btn btn-block">Continue without logging in</Link>
                           <hr/>
                         </form>
                         <hr/>

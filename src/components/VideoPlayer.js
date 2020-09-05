@@ -5,7 +5,6 @@ import youtube from '../apis/youtube';
 import VideoList from './VideoList';
 import VideoDetail from './VideoDetail';
 import axios from 'axios';
-// import SavedVideoItem from './SavedVideoItem';
 
 const KEY = 'AIzaSyAfEaZF62jt_nxrzVhl40SASJPfLLURpS4';
 // const KEY = 'AIzaSyAfEaZF62jt_nxrzVhl40SASJPdisabled';
@@ -14,18 +13,14 @@ class VideoPlayer extends React.Component {
     state = {savedVideos: [], videos: [], selectedVideo: null, loggedIn: false, user: ''}
 
     componentDidMount() {
-        this.onTermSubmit('building')
+        // this.onTermSubmit('building')
         this.validateLogin()
         this.setState({ user: JSON.parse(localStorage.getItem('trueUID'))})
         setTimeout(() => {
-            this.getSavedVideo()
+            this.getSavedVideos()
         }, 1000) 
-    }
 
-    componentDidUpdate() {
-        console.log(this.state.savedVideos)
-        console.log(this.state.user)
-        
+        console.log('mounted')
     }
 
     onVideoSelect = (video) => {
@@ -44,30 +39,62 @@ class VideoPlayer extends React.Component {
         })
 
         this.setState({ videos: response.data.items, selectedVideo: response.data.items[0]})
-        console.log(response.data.items)
     }
 
-    getSavedVideo = () => {
-        const {user} = this.state
+    getSavedVideos = () => {
+        const {user, loggedIn} = this.state
 
-        axios.get('http://localhost:5000/users/get-videos', {
+        if(loggedIn) {
+            axios.get('http://localhost:5000/users/get-videos', {
             params: {id: user}
-        }).then((res) => {
-            // console.log(res.data.videos)
-            this.setState({ savedVideos: res.data.videos})
-        }).catch(err => console.log(err))
+            }).then((res) => {
+                this.setState({ savedVideos: res.data.videos})
+            }).catch(err => console.log(err))
+        } else {
+            console.log('user not logged in')
+        }   
     }
 
     saveVideo = (video) => {
 
+        const sameVideo = this.state.savedVideos.find((videos) => {
+            return videos.etag === video.etag
+        })
+
         const {user} = this.state
 
-        axios.post('http://localhost:5000/users/save-video', {
+        if(sameVideo) {
+            console.log('already saved')
+        } else {
+            axios.post('http://localhost:5000/users/save-video', {
             params: { id: user, videos: video}
-        })
-        .then((res) => {
-            this.setState({savedVideos: res.data.videos})
-        }).catch((err) => {console.log(err)})
+            })
+            .then((res) => {
+                this.setState({savedVideos: res.data.videos})
+            }).catch((err) => {console.log(err)})
+        }
+
+        this.setState(this.state)
+
+        
+    }
+
+    removeVideo = (video) => {
+
+        const {user} = this.state
+        const videoID = video.etag
+
+        const data = {
+            user: user,
+            videoId: videoID 
+        }
+        
+        axios.post('http://localhost:5000/users/delete-video', data).then((msg) => {
+            console.log(msg.data)
+        }).catch(err => console.log(err))
+        setTimeout(() => {
+            this.getSavedVideos()
+        }, 1000)
     }
 
     validateLogin = () => {
@@ -90,8 +117,8 @@ class VideoPlayer extends React.Component {
                                 <div className="col-lg-4">
                                     <VideoList onVideoSelect={this.onVideoSelect} videos={this.state.videos} />
                                 </div>
-                                <div className="col-lg-12 px-4">
-                                    <VideoList status={"saved-video"} onVideoSelect={this.onVideoSelect} videos={this.state.savedVideos} />
+                                <div className="col-lg-12">
+                                    <VideoList removeVideo={this.removeVideo} status={"saved-video"} onVideoSelect={this.onVideoSelect} videos={this.state.savedVideos} />
                                 </div>
                             </div>
                         </div>

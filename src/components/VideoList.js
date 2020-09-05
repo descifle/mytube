@@ -2,10 +2,10 @@ import React from 'react';
 import './videolist.scss';
 import VideoItem  from './/VideoItem';
 
-const VideoList = ({ videos, onVideoSelect, status }) => {
+const VideoList = ({ videos, onVideoSelect, status, removeVideo}) => {
 
     const renderedList = videos.map((video) => {
-        return <VideoItem status={status} key={video.id.videoId} onVideoSelect={onVideoSelect} video={video} />
+        return <VideoItem removeVideo={removeVideo} status={status} key={video.id.videoId} onVideoSelect={onVideoSelect} video={video} />
     })
 
     return (
